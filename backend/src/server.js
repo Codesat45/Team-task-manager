@@ -30,12 +30,28 @@ const app = express();
 app.use(helmet());
 app.use(
   cors({
-    origin: [
-      'http://localhost:5173',
-      'http://localhost:5174',
-      'http://localhost:5175',
-      process.env.CLIENT_URL,
-    ].filter(Boolean),
+    origin: (origin, callback) => {
+      // Allow requests with no origin (mobile apps, curl, Postman)
+      if (!origin) return callback(null, true);
+
+      const allowed = [
+        'http://localhost:5173',
+        'http://localhost:5174',
+        'http://localhost:5175',
+        'http://localhost:4173',
+        process.env.CLIENT_URL,
+      ].filter(Boolean);
+
+      // Allow any onrender.com subdomain
+      if (
+        allowed.includes(origin) ||
+        origin.endsWith('.onrender.com')
+      ) {
+        return callback(null, true);
+      }
+
+      return callback(new Error(`CORS blocked: ${origin}`));
+    },
     credentials: true,
   })
 );
