@@ -27,6 +27,9 @@ services:
     rootDir: frontend
     buildCommand: npm install && npm run build
     staticPublishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://team-task-manager-1-k0yr.onrender.com/api
     routes:
       - type: rewrite
         source: /*

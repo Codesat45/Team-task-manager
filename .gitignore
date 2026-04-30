@@ -2,8 +2,7 @@
 node_modules/
 */node_modules/
 
-# Environment variables
-.env
+# Environment variables — only exclude backend secrets
 backend/.env
 
 # Build output
