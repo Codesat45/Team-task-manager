@@ -1,0 +1,201 @@
+@import "tailwindcss";
+
+@layer base {
+  * { box-sizing: border-box; }
+
+  body {
+    @apply bg-slate-50 text-slate-800 antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { @apply bg-slate-100; }
+  ::-webkit-scrollbar-thumb { @apply bg-slate-300 rounded-full; }
+  ::-webkit-scrollbar-thumb:hover { @apply bg-slate-400; }
+}
+
+@layer utilities {
+  /* ── App UI ──────────────────────────────────────────────────────────── */
+  .sidebar-link {
+    @apply flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150;
+  }
+  .sidebar-link-active  { @apply bg-indigo-600 text-white shadow-sm; }
+  .sidebar-link-inactive { @apply text-slate-600 hover:bg-slate-100 hover:text-slate-900; }
+
+  .card { @apply bg-white rounded-xl border border-slate-200 shadow-sm; }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg
+           hover:bg-indigo-700 active:bg-indigo-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 px-4 py-2 bg-white text-slate-700 text-sm font-medium rounded-lg
+           border border-slate-200 hover:bg-slate-50 active:bg-slate-100 transition-colors
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-danger {
+    @apply inline-flex items-center gap-2 px-4 py-2 bg-red-600 text-white text-sm font-medium rounded-lg
+           hover:bg-red-700 active:bg-red-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .input {
+    @apply w-full px-3 py-2 text-sm border border-slate-200 rounded-lg bg-white placeholder-slate-400
+           focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all;
+  }
+  .label      { @apply block text-sm font-medium text-slate-700 mb-1; }
+  .form-error { @apply text-xs text-red-500 mt-1; }
+
+  /* ── Dashboard Netflix effect ────────────────────────────────────────── */
+  .netflix-stat-card {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    cursor: default;
+  }
+  .netflix-stat-card:hover {
+    transform: scale(1.04) translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.12), 0 8px 16px rgba(0,0,0,0.08);
+    z-index: 10;
+  }
+  .netflix-stat-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  .netflix-stat-card:hover::after { opacity: 1; }
+
+  .netflix-row-item {
+    flex-shrink: 0;
+    transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    cursor: pointer;
+  }
+  .netflix-row-item:hover {
+    transform: scale(1.06) translateY(-6px);
+    z-index: 10;
+  }
+
+  /* ── Landing page — Peach theme ──────────────────────────────────────── */
+  .peach-gradient-text {
+    background: linear-gradient(135deg, #e8845a 0%, #c1440e 50%, #f4a261 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .peach-glass {
+    background: rgba(255, 248, 244, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(244, 201, 176, 0.6);
+  }
+
+  .peach-card {
+    @apply relative overflow-hidden rounded-2xl p-6 transition-all duration-300;
+    background: rgba(255, 248, 244, 0.8);
+    border: 1px solid rgba(244, 201, 176, 0.5);
+  }
+  .peach-card:hover {
+    transform: translateY(-6px);
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(232, 132, 90, 0.5);
+    box-shadow: 0 20px 40px rgba(232, 132, 90, 0.15), 0 0 20px rgba(232, 132, 90, 0.1);
+  }
+
+  .peach-pill {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold;
+    background: rgba(255, 248, 244, 0.8);
+    border: 1px solid rgba(244, 201, 176, 0.6);
+    backdrop-filter: blur(8px);
+  }
+
+  /* ── Netflix scroll row ──────────────────────────────────────────────── */
+  .netflix-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(232,132,90,0.4) transparent;
+  }
+  .netflix-scroll::-webkit-scrollbar { height: 4px; }
+  .netflix-scroll::-webkit-scrollbar-track { background: transparent; }
+  .netflix-scroll::-webkit-scrollbar-thumb { background: rgba(232,132,90,0.4); border-radius: 4px; }
+
+  .netflix-card {
+    transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  /* ── Animations ──────────────────────────────────────────────────────── */
+  .animate-float        { animation: float 6s ease-in-out infinite; }
+  .animate-float-delay  { animation: float 6s ease-in-out 2s infinite; }
+  .animate-float-delay2 { animation: float 6s ease-in-out 4s infinite; }
+  .animate-pulse-slow   { animation: pulse 4s cubic-bezier(0.4,0,0.6,1) infinite; }
+  .animate-slide-up     { animation: slideUp 0.6s ease-out forwards; }
+  .animate-fade-in      { animation: fadeIn 0.8s ease-out forwards; }
+}
+
+/* ── Keyframes ───────────────────────────────────────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33%       { transform: translateY(-12px) rotate(1deg); }
+  66%       { transform: translateY(-6px) rotate(-1deg); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes orb {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25%       { transform: translate(30px, -20px) scale(1.05); }
+  50%       { transform: translate(-20px, 30px) scale(0.95); }
+  75%       { transform: translate(20px, 20px) scale(1.02); }
+}
+
+.orb-1 { animation: orb 12s ease-in-out infinite; }
+.orb-2 { animation: orb 16s ease-in-out 4s infinite reverse; }
+.orb-3 { animation: orb 10s ease-in-out 8s infinite; }
+
+@keyframes growUp {
+  from { transform: scaleY(0); }
+  to   { transform: scaleY(1); }
+}
+.bar-animate {
+  transform-origin: bottom;
+  animation: growUp 0.8s ease-out forwards;
+}
+
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.count-animate { animation: countUp 0.5s ease-out forwards; }
+
+/* ── Netflix shimmer on hover ────────────────────────────────────────────── */
+@keyframes shimmer {
+  0%   { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(200%) skewX(-15deg); }
+}
+.netflix-shimmer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  transform: translateX(-100%) skewX(-15deg);
+  pointer-events: none;
+}
+.netflix-shimmer:hover::before {
+  animation: shimmer 0.6s ease-out;
+}
+
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
