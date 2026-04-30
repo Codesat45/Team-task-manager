@@ -9,6 +9,7 @@ export default defineConfig({
   ],
   server: {
     port: 5173,
+    host: true,
     proxy: {
       '/api': {
         target: 'http://localhost:5000',
@@ -19,6 +20,11 @@ export default defineConfig({
   preview: {
     port: 4173,
     host: true,
-    allowedHosts: 'all',
+    allowedHosts: [
+      'all',
+      '.onrender.com',
+      'team-task-manager-9.onrender.com',
+      'localhost',
+    ],
   },
 })
