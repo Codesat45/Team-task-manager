@@ -46,19 +46,5 @@ npm run dev            # runs on http://localhost:5173
 |-----|-------|
 | `VITE_API_URL` | Your backend Render URL + `/api` (e.g. `https://ttm-backend.onrender.com/api`) |
 
-## Environment Variables
 
-### Backend (`backend/.env`)
-```
-PORT=5000
-MONGO_URI=mongodb+srv://...
-JWT_SECRET=your_secret
-JWT_EXPIRES_IN=7d
-NODE_ENV=development
-CLIENT_URL=http://localhost:5173
-```
-
-### Frontend (`frontend/.env`)
-```
-VITE_API_URL=http://localhost:5000/api
 ```
